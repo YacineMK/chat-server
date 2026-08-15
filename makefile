@@ -5,8 +5,8 @@ LDFLAGS = -pthread
 SRC_DIR = src
 BIN_DIR = bin
 
-SERVER_SRC = $(SRC_DIR)/server.c $(SRC_DIR)/network.c
-CLIENT_SRC = $(SRC_DIR)/client.c $(SRC_DIR)/network.c
+SERVER_SRC = $(SRC_DIR)/server.c $(SRC_DIR)/network.c $(SRC_DIR)/log.c
+CLIENT_SRC = $(SRC_DIR)/client.c $(SRC_DIR)/network.c $(SRC_DIR)/log.c
 
 SERVER_BIN = $(BIN_DIR)/server
 CLIENT_BIN = $(BIN_DIR)/client

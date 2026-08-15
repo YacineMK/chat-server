@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 
 #include "network.h"
+#include "log.h"
 
 int create_socket(void) {
     int socket_fd;
@@ -175,18 +176,24 @@ void *handle_client(void *arg)
 
     free(arg);
 
+    log_message("INFO", "client fd=%d handler started", client_socket);
+
     while (1)
     {
         char *message = NULL;
 
         if (receive_message(client_socket, &message) <= 0)
         {
+            log_message("INFO", "client fd=%d disconnected", client_socket);
             break;
         }
 
         printf("Client: %s\n", message);
+        log_message("INFO", "recv fd=%d: %s", client_socket, message);
 
-        send_message(client_socket, "Message received");
+        const char *reply = "Message received";
+        send_message(client_socket, reply);
+        log_message("INFO", "send fd=%d: %s", client_socket, reply);
 
         free(message);
     }
